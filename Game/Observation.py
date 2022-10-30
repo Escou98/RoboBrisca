@@ -25,6 +25,13 @@ class Observation:
         self.playing_cards = playing_cards.clone()
         self.winner = winner
 
+    def is_terminal(self):
+        return self.main_deck.empty() \
+               and self.hands[0].empty() \
+               and self.hands[1].empty() \
+               and self.hands[2].empty() \
+               and self.hands[3].empty()
+
     # Returns the actions that the player can play
     def get_list_actions(self):
         l_actions = []

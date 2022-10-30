@@ -13,6 +13,7 @@ from Players.HumanPlayer import HumanPlayer
 from Players.OSLAPlayer import OSLAPlayer
 from Players.SlowPlayer import SlowPlayer
 from Players.RandomPlayer import RandomPlayer
+from Players.MCTSPlayer import MCTSPlayer
 from Game.BriscaGame import BriscaGame
 
 
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     player_id_as_first = random.choice(range(game_state.n_players))        # who starts is determined randomly
     game.reset(game_state, player_id_as_first)                             # Game initialization
 
-    l_players = [RandomPlayer(), OSLAPlayer()]    # list of Players
+    l_players = [MCTSPlayer(), OSLAPlayer()]    # list of Players
 
     if save_game:
         game.save_game_on(save_name)

@@ -14,7 +14,7 @@ from Players.Player import Player
 # --------------------------------
 class Bot4(Player):
     def __init__(self, filename):
-        self.drlmodel = DRLModel()                # Creare empty drl model
+        self.drlmodel = DRLModel()                # Create empty drl model
         self.drlmodel.load_from_disk(filename)    # Load a previously trained NN
         self.filename = filename
 

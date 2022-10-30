@@ -13,7 +13,7 @@ class ForwardModel:
 
     # Play an action given the actual state of the game.
     # Returns the reward obtained after playing the action
-    def play(self, gs, action, ht):
+    def play(self, gs: "It can be Game.GameState or  Game.Observation", action, ht):
         actual_player = gs.turn
 
         card = action.get_card()

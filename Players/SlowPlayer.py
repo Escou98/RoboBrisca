@@ -9,7 +9,7 @@ from Players.Player import Player
 
 # ---------------------------------------------------------------------------
 # Wait a long time period (more than budget allowed) and then returns the first action
-# This player is just for testing whaht happens when the bot does not answer into the budget time
+# This player is just for testing what happens when the bot does not answer into the budget time
 # ---------------------------------------------------------------------------
 class SlowPlayer(Player):
     def think(self, observation, budget):
