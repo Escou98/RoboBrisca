@@ -40,10 +40,9 @@ class MCTSNode:
 
     def rollout(self, forward_model):
         i = 0
-        max_iter = 10
+        max_iter = 100
         new_obs = self.observation.clone()
-        forward_model.play(new_obs, self.action, self.heuristic)
-        while i < max_iter and not new_obs.is_terminal():
+        while not new_obs.is_terminal():
             # Counting every turn as iteration yet
             forward_model.play(new_obs, random.choice(new_obs.get_list_actions()), self.heuristic)
             i += 1

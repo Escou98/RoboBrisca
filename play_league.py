@@ -13,7 +13,8 @@ from Players.AlwaysFirstPlayer import AlwaysFirstPlayer
 from Players.Bot1 import Bot1
 from Players.Bot2 import Bot2
 from Players.Bot3 import Bot3
-from Players.Bot4 import Bot4
+# from Players.Bot4 import Bot4
+from Players.MCTSPlayer import MCTSPlayer
 from Players.OSLAPlayer import OSLAPlayer
 from Players.RandomPlayer import RandomPlayer
 
@@ -59,7 +60,8 @@ if __name__ == '__main__':
     heuristic = Heuristic()         # Heuristic to known how good is to be in a particular game state
     forward_model = ForwardModel()  # Rules of the game
 
-    l_players = [Bot4("NN/bot4_1e4.nn"), OSLAPlayer()]  # List of players of the competition
+    #l_players = [Bot4("NN/bot4_1e4.nn"), OSLAPlayer()]  # List of players of the competition
+    l_players = [MCTSPlayer(), OSLAPlayer()]  # List of players of the competition
     print_information(n_matches, l_players)
 
     l_points = [0.0 for i in range(len(l_players))]   # 0.0 points for each player

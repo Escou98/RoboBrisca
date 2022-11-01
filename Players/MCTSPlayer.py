@@ -12,7 +12,7 @@ class MCTSPlayer(Player):
         self.heuristic = Heuristic()
 
     def think(self, observation, budget):
-        iterations = 10
+        iterations = 40
         root = MCTSNode(None, None, observation)
         root.expand(self.forward_model)
         for i in range(iterations):
@@ -27,4 +27,4 @@ class MCTSPlayer(Player):
         return best_child.action
 
     def __str__(self):
-        return "OSLAPlayer"
+        return "MCTSPlayer"
