@@ -16,7 +16,7 @@ from Players.Player import Player
 class Bot2(Player):
     def __init__(self):
         self.forward_model = ForwardModel()
-        self.heuristic = MyHeuristic()
+        self.heuristic = SergiHeuristic()
 
     def think(self, observation, budget):
         list_actions = observation.get_list_actions()

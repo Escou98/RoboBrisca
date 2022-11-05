@@ -52,7 +52,7 @@ if __name__ == '__main__':
     controlling_time = True  # If the player time to think is going to be controlled True/False
     save_game = False        # If the game is saved to be studied in the future True/False
     save_name = "Out/game"
-    n_matches = 100          # Matches between two bots
+    n_matches = 100000          # Matches between two bots
     sleep_time = 0           # time to sleep between games, It's just to add excitement for public watching the games
 
     game = BriscaGame()             # Game class
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     forward_model = ForwardModel()  # Rules of the game
 
     #l_players = [Bot4("NN/bot4_1e4.nn"), OSLAPlayer()]  # List of players of the competition
-    l_players = [Bot2(), OSLAPlayer()]  # List of players of the competition
+    l_players = [OSLAPlayer(), Bot2()]  # List of players of the competition
     print_information(n_matches, l_players)
 
     l_points = [0.0 for i in range(len(l_players))]   # 0.0 points for each player
