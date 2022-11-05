@@ -27,8 +27,6 @@ class CardCollection:
         random.shuffle(self.l_cards)
 
     def get_last_card(self):
-        if len(self.l_cards) == 0:
-            return None
         return self.l_cards[len(self.l_cards)-1]
 
     def len(self):

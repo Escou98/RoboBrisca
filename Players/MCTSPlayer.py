@@ -12,9 +12,11 @@ class MCTSPlayer(Player):
         self.heuristic = Heuristic()
 
     def think(self, observation, budget):
-        iterations = 40
         root = MCTSNode(None, None, observation)
         root.expand(self.forward_model)
+
+        iterations = 5
+
         for i in range(iterations):
             current = root
             while not current.is_leaf():
@@ -24,6 +26,7 @@ class MCTSPlayer(Player):
             else:
                 current.expand(self.forward_model)
         best_child = root.get_best_child()
+
         return best_child.action
 
     def __str__(self):

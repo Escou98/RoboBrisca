@@ -9,6 +9,7 @@ from Game.ForwardModel import ForwardModel
 from Game.GameState import GameState
 from Game.Heuristic import Heuristic
 from Players.AlwaysFirstPlayer import AlwaysFirstPlayer
+from Players.Bot2 import Bot2
 from Players.HumanPlayer import HumanPlayer
 from Players.OSLAPlayer import OSLAPlayer
 from Players.SlowPlayer import SlowPlayer
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     player_id_as_first = random.choice(range(game_state.n_players))        # who starts is determined randomly
     game.reset(game_state, player_id_as_first)                             # Game initialization
 
-    l_players = [MCTSPlayer(), OSLAPlayer()]    # list of Players
+    l_players = [Bot2(), OSLAPlayer()]    # list of Players
 
     if save_game:
         game.save_game_on(save_name)

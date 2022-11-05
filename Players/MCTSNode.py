@@ -1,6 +1,7 @@
 import math
 import random
-from Game.Heuristic import Heuristic
+from Players.SergiHeuristic import SergiHeuristic
+
 
 
 class MCTSNode:
@@ -12,8 +13,21 @@ class MCTSNode:
         self.visits = 0
         self.observation = observation
         self.big_number = 100000
-        self.score = 0
-        self.heuristic = Heuristic()
+        self.myturn = self.get_turn()
+        self.mate_turn = self.get_mate_turn()
+        self.heuristic = SergiHeuristic()
+
+    def get_turn(self):
+        if self.observation.turn == 0:
+            return 3
+        else:
+            return self.observation.turn - 1
+
+    def get_mate_turn(self):
+        turn = self.myturn + 2
+        if turn > 3:
+            turn = 0
+        return turn
 
     def expand(self, forward_model):
         actions = self.observation.get_list_actions()
@@ -39,21 +53,49 @@ class MCTSNode:
         return best_child
 
     def rollout(self, forward_model):
-        i = 0
-        max_iter = 100
         new_obs = self.observation.clone()
         while not new_obs.is_terminal():
             # Counting every turn as iteration yet
+            if new_obs.turn == self.myturn:
+                new_obs = new_obs.get_randomized_clone()
+                self.wins += self.heuristic.get_score(new_obs, self.myturn)
             forward_model.play(new_obs, random.choice(new_obs.get_list_actions()), self.heuristic)
-            i += 1
-        self.score = self.heuristic.get_score(new_obs, self.observation.turn)
+
+        forward_model.check_winner(new_obs)
+
+        phi = 1
+        if new_obs.winner == self.myturn:
+            phi = 4
+        self.wins += forward_model.get_points_player(self.myturn, new_obs) * phi
+        self.wins += forward_model.get_points_player(self.mate_turn, new_obs) * phi
         self.backpropagate()
+
+    def play_best_action(self, fm, obs):
+        best_action = None
+        best_reward = None
+
+        for action in obs.get_list_actions():
+            n_obs = obs.clone()
+            player_id = obs.turn
+            fm.play(n_obs, action, self.heuristic)
+            reward = self.heuristic.get_score(n_obs, player_id)
+            if best_reward is None or reward > best_reward:
+                best_reward = reward
+                best_action = action
+        fm.play(obs, best_action, self.heuristic)
 
     def backpropagate(self):
         current = self.parent
         while current is not None:
-            current.update(self.score)
+            current.update(self.wins)
             current = current.parent
+
+    def clear_children(self):
+        for child in self.children:
+            self.children.remove(child)
+
+    def randomize_observation(self):
+        self.observation = self.observation.get_randomized_clone()
 
     def add_child(self, action, observation):
         new_node = MCTSNode(action, self, observation)

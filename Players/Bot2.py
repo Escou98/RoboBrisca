@@ -8,6 +8,8 @@ import math
 
 from Game.ForwardModel import ForwardModel
 from Players.MyHeuristic import MyHeuristic
+from Players.SergiHeuristic import SergiHeuristic
+from Game.Heuristic import Heuristic
 from Players.Player import Player
 
 

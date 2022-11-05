@@ -2,13 +2,15 @@ import math
 
 from Game.ForwardModel import ForwardModel
 from Game.Heuristic import Heuristic
+from Players.MyHeuristic import MyHeuristic
+from Players.SergiHeuristic import SergiHeuristic
 from Players.Player import Player
 
 
 class OSLAPlayer(Player):
     def __init__(self):
         self.forward_model = ForwardModel()
-        self.heuristic = Heuristic()
+        self.heuristic = SergiHeuristic()
 
     def think(self, observation, budget):
         list_actions = observation.get_list_actions()

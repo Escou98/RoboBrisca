@@ -32,6 +32,7 @@ class Card:
             return 2
         return 0
 
+
     def clone(self):
         new_card = Card(self.card_type, self.card_number)
         return new_card
